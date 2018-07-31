@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import inquirer from 'inquirer';
+import inquirer from '@aleclarson/inquirer';
 import handlebars from 'handlebars';
 import _get from 'lodash.get';
 import resolve from 'resolve';
