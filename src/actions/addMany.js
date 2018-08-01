@@ -1,7 +1,7 @@
 import co from 'co';
 import path from 'path';
 import fs from 'fs';
-import globby from 'globby';
+import recrawl from 'recrawl';
 import isBinary from 'isbinaryfile';
 import {readFile} from '../fs-promise-proxy';
 import actionInterfaceTest from './_common-action-interface-check';
@@ -48,8 +48,10 @@ export default co.wrap(function* (data, cfg, plop) {
 });
 
 function resolveTemplateFiles(templateFilesGlob, basePath, globOptions, plop) {
-	globOptions = Object.assign({ cwd: plop.getPlopfilePath() }, globOptions);
-	return globby.sync(templateFilesGlob, Object.assign({nobrace: true}, globOptions))
+	const crawl = recrawl({
+		only: [templateFilesGlob],
+	});
+	return crawl(plop.getPlopfilePath())
 		.filter(isUnder(basePath))
 		.filter(isAbsoluteOrRelativeFileTo(plop.getPlopfilePath()));
 }
