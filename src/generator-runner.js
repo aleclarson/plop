@@ -98,17 +98,19 @@ export default function (plopfileApi, flags) {
 		// convert any returned data into a promise to
 		// return and wait on
 		const fullData = Object.assign({}, cfg.data, data);
-		return yield Promise.resolve(action(fullData, cfg, plopfileApi)).then(
-			// show the resolved value in the console
-			result => ({
-				type: cfg.type || 'function',
-				path: chalk.blue(result.toString())
-			}),
-			// a rejected promise is treated as a failure
-			function (err) {
-				throw failure(err.message || err.toString());
+		return yield (async () => {
+			try {
+				const result = await action(fullData, cfg, plopfileApi);
+				// show the resolved value in the console
+				return {
+					type: cfg.type || 'function',
+					path: chalk.blue(result.toString())
+				};
+			} catch(err) {
+				// a rejected promise is treated as a failure
+				throw failure(err.stack || err.message || err.toString());
 			}
-		);
+		})();
 	});
 
 	// request the list of custom actions from the plopfile
