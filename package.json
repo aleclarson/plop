@@ -56,8 +56,8 @@
   "dependencies": {
     "@aleclarson/inquirer": "^6.0.0",
     "change-case": "^3.0.1",
+    "chalk": "^2.0.0",
     "co": "^4.6.0",
-    "colors": "^1.1.2",
     "core-js": "^2.4.1",
     "del": "^3.0.0",
     "globby": "^8.0.0",

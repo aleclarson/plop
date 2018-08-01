@@ -1,7 +1,7 @@
 'use strict';
 
 import co from 'co';
-import colors from 'colors';
+import chalk from 'chalk';
 import promptBypass from './prompt-bypass';
 import * as buildInActions from './actions';
 
@@ -102,7 +102,7 @@ export default function (plopfileApi, flags) {
 			// show the resolved value in the console
 			result => ({
 				type: cfg.type || 'function',
-				path: colors.blue(result.toString())
+				path: chalk.blue(result.toString())
 			}),
 			// a rejected promise is treated as a failure
 			function (err) {
