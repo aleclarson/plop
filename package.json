@@ -59,14 +59,14 @@
     "chalk": "^2.0.0",
     "co": "^4.6.0",
     "core-js": "^2.4.1",
-    "del": "^3.0.0",
     "handlebars": "^4.0.5",
     "isbinaryfile": "^3.0.2",
     "lodash.get": "^4.4.2",
     "mkdirp": "^0.5.1",
     "pify": "^3.0.0",
     "recrawl": "0.0.2",
-    "resolve": "^1.2.0"
+    "resolve": "^1.2.0",
+    "saxon": "^0.1.5"
   },
   "ava": {
     "files": [

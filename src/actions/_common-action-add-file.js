@@ -1,5 +1,5 @@
 import path from 'path';
-import del from 'del';
+import fs from 'saxon/sync';
 import {
 	getRenderedTemplate,
 	makeDestPath,
@@ -18,7 +18,7 @@ export default function* addFile(data, cfg, plop) {
 
 		// if we are forcing and the file already exists, delete the file
 		if (force === true && destExists) {
-			yield del([fileDestPath]);
+			fs.remove(fileDestPath, true);
 			destExists = false;
 		}
 
