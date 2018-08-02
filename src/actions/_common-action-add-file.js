@@ -6,7 +6,7 @@ import {
 	throwStringifiedError,
 	getRelativeToBasePath
 } from './_common-action-utils';
-import isBinary from 'isbinaryfile';
+import isBinary from '@aleclarson/isbinaryfile';
 import * as fspp from '../fs-promise-proxy';
 
 export default function* addFile(data, cfg, plop) {

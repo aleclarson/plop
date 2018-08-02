@@ -2,7 +2,7 @@ import co from 'co';
 import path from 'path';
 import fs from 'fs';
 import recrawl from 'recrawl';
-import isBinary from 'isbinaryfile';
+import isBinary from '@aleclarson/isbinaryfile';
 import {readFile} from '../fs-promise-proxy';
 import actionInterfaceTest from './_common-action-interface-check';
 import addFile from './_common-action-add-file';
