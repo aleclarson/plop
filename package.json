@@ -1,5 +1,5 @@
 {
-  "name": "plop",
+  "name": "@aleclarson/plop",
   "version": "0.15.0",
   "description": "programmatic plopping for fun and profit",
   "main": "lib/index.js",
