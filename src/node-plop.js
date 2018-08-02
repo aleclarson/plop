@@ -14,7 +14,7 @@ function nodePlop(plopfilePath = '', plopCfg = {}) {
 	let defaultInclude = {generators: true};
 
 	let welcomeMessage;
-	const {destBasePath, force} = plopCfg;
+	let {destBasePath, force} = plopCfg;
 	const generators = {};
 	const partials = {};
 	const actionTypes = {};
@@ -66,6 +66,13 @@ function nodePlop(plopfilePath = '', plopCfg = {}) {
 	const setDefaultInclude = inc => defaultInclude = inc;
 	const getDefaultInclude = () => defaultInclude;
 	const getDestBasePath = () => destBasePath || plopfilePath;
+	const setDestBasePath = basePath => {
+		if (!basePath) {
+			destBasePath = null;
+		} else {
+			destBasePath = basePath;
+		}
+	};
 	const getPlopfilePath = () => plopfilePath;
 	const setPlopfilePath = filePath => {
 		const pathStats = fs.statSync(filePath);
@@ -142,7 +149,7 @@ function nodePlop(plopfilePath = '', plopCfg = {}) {
 
 		// path context methods
 		setPlopfilePath, getPlopfilePath,
-		getDestBasePath,
+		setDestBasePath, getDestBasePath,
 
 		// plop.load functionality
 		load, setDefaultInclude, getDefaultInclude,
