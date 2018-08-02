@@ -1,5 +1,5 @@
 import path from 'path';
-import * as fspp from '../fs-promise-proxy';
+import fsp from 'saxon';
 
 const getFullData = (data, cfg) => Object.assign({}, cfg.data, data);
 export const makeDestPath = (data, cfg, plop) =>
@@ -18,7 +18,7 @@ export function* getTemplate(data, cfg, plop) {
 			cfg.templateFile,
 			getFullData(data, cfg)
 		);
-		template = yield fspp.readFile(makeTmplPath(templateFile));
+		template = yield fsp.read(makeTmplPath(templateFile));
 	}
 	if (template == null) {
 		template = '';

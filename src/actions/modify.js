@@ -1,5 +1,5 @@
 import co from 'co';
-import * as fspp from '../fs-promise-proxy';
+import fsp from 'saxon';
 import {
 	getRenderedTemplate,
 	makeDestPath,
@@ -17,15 +17,15 @@ export default co.wrap(function*(data, cfg, plop) {
 	const fileDestPath = makeDestPath(data, cfg, plop);
 	try {
 		// check path
-		const pathExists = yield fspp.fileExists(fileDestPath);
+		const pathExists = yield fsp.exists(fileDestPath);
 
 		if (!pathExists) {
 			throw 'File does not exists';
 		} else {
-			let fileData = yield fspp.readFile(fileDestPath);
+			let fileData = yield fsp.read(fileDestPath);
 			const replacement = yield getRenderedTemplate(data, cfg, plop);
 			fileData = fileData.replace(cfg.pattern, replacement);
-			yield fspp.writeFile(fileDestPath, fileData);
+			yield fsp.write(fileDestPath, fileData);
 		}
 		return getRelativeToBasePath(fileDestPath, plop);
 	} catch (err) {
