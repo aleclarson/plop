@@ -75,9 +75,9 @@ export default function (plopfileApi, flags) {
 
 			try {
 				const actionResult = yield executeActionLogic(actionLogic, actionCfg, data);
-				changes.push(actionResult);
+				if (actionResult) plopfileApi.onActionSuccess(actionResult);
 			} catch(failure) {
-				failures.push(failure);
+				plopfileApi.onActionFailure(failure);
 			}
 		}
 

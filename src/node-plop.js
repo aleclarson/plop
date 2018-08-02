@@ -163,7 +163,10 @@ function nodePlop(plopfilePath = '', plopCfg = {}) {
 		// passthroughs for backward compatibility
 		addPrompt: setPrompt,
 		addPartial: setPartial,
-		addHelper: setHelper
+		addHelper: setHelper,
+
+		onActionSuccess: plopCfg.onActionSuccess || Function.prototype,
+		onActionFailure: plopCfg.onActionFailure || Function.prototype,
 	};
 
 	// the runner for this instance of the nodePlop api
