@@ -1,7 +1,6 @@
 'use strict';
 
 import co from 'co';
-import chalk from 'chalk';
 import * as buildInActions from './actions';
 
 
@@ -96,13 +95,16 @@ export default function (plopfileApi, flags) {
 			try {
 				const result = await action(fullData, cfg, plopfileApi);
 				// show the resolved value in the console
-				return {
+				if (result) return {
 					type: cfg.type || 'function',
-					path: chalk.blue(result.toString())
+					path: result.toString()
 				};
 			} catch(err) {
 				// a rejected promise is treated as a failure
-				throw failure(err.stack || err.message || err.toString());
+				if (err.constructor === Object) {
+					throw Object.assign(failure(), err);
+				}
+				throw failure(err.message || err.toString());
 			}
 		})();
 	});

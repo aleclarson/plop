@@ -13,7 +13,12 @@ export default co.wrap(function* (data, cfg, plop) {
 	if (interfaceTestResult !== true) { throw interfaceTestResult; }
 	// check that destination (instead of path) is a string value
 	const dest = cfg.destination;
-	if (typeof dest !== 'string' || dest.length === 0) { throw `Invalid destination "${dest}"`; }
+	if (typeof dest !== 'string' || dest.length === 0) {
+		throw {
+			path: dest,
+			error: 'Invalid destination',
+		};
+	}
 
 	if (cfg.base) {
 		cfg.base = plop.renderString(cfg.base, data);

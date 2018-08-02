@@ -4,7 +4,6 @@ import {
 	getRenderedTemplate,
 	makeDestPath,
 	throwStringifiedError,
-	getRelativeToBasePath
 } from './_common-action-utils';
 import isBinary from '@aleclarson/isbinaryfile';
 import * as fspp from '../fs-promise-proxy';
@@ -24,8 +23,11 @@ export default function* addFile(data, cfg, plop) {
 
 		// we can't create files where one already exists
 		if (destExists) {
-			if (skipIfExists) { return `[SKIPPED] ${fileDestPath} (exists)`; }
-			throw `File already exists\n -> ${fileDestPath}`;
+			if (skipIfExists) return;
+			throw {
+				path: fileDestPath,
+				error: 'File already exists',
+			};
 		} else {
 			yield fspp.makeDir(path.dirname(fileDestPath));
 
@@ -43,7 +45,7 @@ export default function* addFile(data, cfg, plop) {
 		}
 
 		// return the added file path (relative to the destination path)
-		return getRelativeToBasePath(fileDestPath, plop);
+		return fileDestPath;
 	} catch (err) {
 		throwStringifiedError(err);
 	}
